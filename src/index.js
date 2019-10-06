@@ -13,15 +13,38 @@ function expressionCalculator(expr) {
   let number = [];
   let result = 0;
   let arr2 = [];
-  let arr3 = []
+  let arr3 = 0;
 
 
   arr = expr.split('');
+  brack(arr);
 
+  //let finish = arr.findIndex(element => element==")");
+  //number = arr.splice(0,finish);
+  //let start = arr.findIndex(element => element=="(");
+  //number = arr.splice(start+1,finish-2);
+function brack(arr) {
   if ( arr.find(item => item == "(")) {
-    arr = arr.reverse();
+    //arr = arr.reverse();
     if ( arr.find(item => item == ")")) {
-    brackets(expr);
+
+      let finish = arr.findIndex(element => element==")");
+      //number = arr.splice(0,finish);
+      let start = arr.findIndex(element => element=="(");
+      number = arr.splice(start,finish);
+      number.pop();
+      number.shift();
+
+      //number = number.join('');
+
+      brack(number);
+
+
+
+
+
+
+   // brackets(expr);
       } else {
         throw "ExpressionError: Brackets must be paired";
       }
@@ -31,6 +54,7 @@ function expressionCalculator(expr) {
       result = plus(expr);
       return result;
     }
+  }
 
   function brackets(expr) {
     for(let i=0; i<expr.length; i++) {
